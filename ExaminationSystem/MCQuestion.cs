@@ -26,6 +26,7 @@ namespace ExaminationSystem
                         Console.Write($"Please Enter the Choice Number {i + 1}: ");
                         text = Console.ReadLine();
                     } while (text is null);
+
                     if (base.AnswerList?.Length > 0)
                         base.AnswerList[i] = new Answers(i + 1, text);
                 }
@@ -43,7 +44,7 @@ namespace ExaminationSystem
                 {
                     Console.WriteLine("Please Specify the Correct Choice of the Question:");
                     isCorrectAnswer = int.TryParse(Console.ReadLine(), out correct);
-                } while (!isCorrectAnswer);
+                } while (!isCorrectAnswer || correct < 0 || correct > AnswerList?.Length);
 
                 if (base.AnswerList?.Length > 0)
                     base.CorrectAnswer = base.AnswerList[correct - 1];
@@ -56,7 +57,7 @@ namespace ExaminationSystem
         #endregion
 
         #region Constructors
-        public MCQuestion(string header, string body, double mark, Answers[] answerList, Answers correctAnswer)
+        public MCQuestion(string header, string body, int mark, Answers[] answerList, Answers correctAnswer)
             : base("Choose One Answer Question", body, mark)
         {
             AnswerList = answerList;
@@ -66,6 +67,13 @@ namespace ExaminationSystem
         {
             AnswerList = AnswerList;
             CorrectAnswer = CorrectAnswer;
+        }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return $"{Header}           Mark({Mark})\n{Body}";
         }
         #endregion
     }

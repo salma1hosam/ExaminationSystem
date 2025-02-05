@@ -17,7 +17,7 @@ namespace ExaminationSystem
         #region Properties
         public int Time
 		{
-			get { return time; }
+			get => time;
 			set
 			{
 				bool isTime;
@@ -25,14 +25,14 @@ namespace ExaminationSystem
 				{
 					Console.Write("Please Enter the Time of the Exam in Minutes: ");
 					isTime = int.TryParse(Console.ReadLine(), out time);
-				} while (!isTime);
+				} while (!isTime || time < 1);
 			}
 		}
 
 
 		public int NumberOfQuestions
 		{
-			get { return numberOfQuestions; }
+			get => numberOfQuestions;
 			set
 			{
 				bool isNumber;
@@ -41,7 +41,7 @@ namespace ExaminationSystem
 					Console.Write("Please Enter the Number of Questions you wanted to create: ");
 					isNumber = int.TryParse(Console.ReadLine(), out numberOfQuestions);
 					Console.Clear();
-				} while (!isNumber);
+				} while (!isNumber || numberOfQuestions < 1);
 			}
 		}
 		#endregion
@@ -54,8 +54,8 @@ namespace ExaminationSystem
         }
         protected Exam()
         {
-			Time = Time;
-			NumberOfQuestions = NumberOfQuestions;
+			Time = time;
+			NumberOfQuestions = numberOfQuestions;
         }
         #endregion
 

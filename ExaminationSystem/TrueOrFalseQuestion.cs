@@ -40,6 +40,7 @@ namespace ExaminationSystem
                     base.CorrectAnswer = base.AnswerList[correct - 1];
                 else
                     Console.WriteLine("AnswerList is Not Initialized");
+
                 Console.Clear();
             }
         }
@@ -48,7 +49,7 @@ namespace ExaminationSystem
 
 
         #region Constructors
-        public TrueOrFalseQuestion(string header, string body, double mark, Answers[] answerList, Answers correctAnswer) :
+        public TrueOrFalseQuestion(string header, string body, int mark, Answers[] answerList, Answers correctAnswer) :
             base("True | False Question", body, mark)
         {
             AnswerList = answerList;
@@ -61,6 +62,11 @@ namespace ExaminationSystem
         }
         #endregion
 
-
+        #region Methods
+        public override string ToString()
+        {
+            return $"{Header}           Mark({Mark})\n{Body}";
+        }
+        #endregion
     }
 }

@@ -12,24 +12,17 @@ namespace ExaminationSystem
 
         private string header;
         private string body;
-        private double mark;
+        private int mark;
 
         private Answers[] answerList;
         private Answers correctAnswer;
         #endregion
 
         #region Properties
-        ///public string Header { get; set; }
-        ///public string Body { get; set; }
-        ///public double Mark { get; set; }
-        ///public Answers []AnswersList { get; set; }
-        ///public int CorrectAnswer { get; set; }
-
-        //public virtual string Header { get; set; }
 
         public virtual string Header
         {
-            get { return header; }
+            get => header; 
             set 
             { 
                 header = value;
@@ -40,7 +33,7 @@ namespace ExaminationSystem
 
         public string Body
         {
-            get { return body; }
+            get => body;
             set 
             {
                 do
@@ -52,47 +45,37 @@ namespace ExaminationSystem
         }
 
 
-        public double Mark
+        public int Mark
         {
-            get { return mark; }
+            get => mark;
             set 
             {
                 bool isMark;
                 do
                 {
                     Console.Write("Please Enter the Mark of the Question: ");
-                    isMark = double.TryParse(Console.ReadLine(), out mark); 
-                } while (!isMark);
+                    isMark = int.TryParse(Console.ReadLine(), out mark); 
+                } while (!isMark || mark < 0);
             }
         }
 
-        public virtual Answers[] AnswerList
-        {
-            get { return answerList; }
-            set { answerList = value; }
-        }
+        public virtual Answers[] AnswerList { get => answerList; set => answerList = value; }
+        public virtual Answers CorrectAnswer { get => correctAnswer; set => correctAnswer = value; }
 
-        public virtual Answers CorrectAnswer
-        {
-            get { return correctAnswer; }
-            set { correctAnswer = value; }
-        }
 
-        ///public virtual Answers[] AnswerList { get; set; }
-        ///public virtual Answers CorrectAnswer { get; set; }
+
+        ///private int[] inputAnswers;
+        ///public int[] InputAnswers
+        ///{
+        ///    get { return inputAnswers; }
+        ///    set { inputAnswers = value; }
+        ///}
+
 
         #endregion
 
         #region Constructors
-        ///protected Question(string header, string body, double mark, Answers[] answersList, int correctAnswer)
-        ///{
-        ///    Header = header;
-        ///    Body = body;
-        ///    Mark = mark;
-        ///    AnswersList = answersList;
-        ///    CorrectAnswer = correctAnswer;
-        ///}
-        protected Question(string header, string body, double mark/*, Answers[] answerList, Answers correctAnswer*/)
+        protected Question(string header, string body, int mark/*, Answers[] answerList, Answers correctAnswer*/)
         {
             Header = header;
             Body = body;
@@ -103,8 +86,8 @@ namespace ExaminationSystem
         protected Question(string header)
         {
             Header = header;
-            Body = Body;
-            Mark = Mark;
+            Body = body;
+            Mark = mark;
         }
 
 

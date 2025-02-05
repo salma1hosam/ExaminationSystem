@@ -13,6 +13,7 @@ namespace ExaminationSystem
 
             if(char.Parse(Console.ReadLine()) == 'y')
             {
+                Console.Clear();
                 Stopwatch sw = Stopwatch.StartNew();
                 sw.Start();
                 sub1.Exam.ShowExam();

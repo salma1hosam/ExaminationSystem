@@ -57,7 +57,7 @@ namespace ExaminationSystem
             {
                 Console.Write("Please Enter the Type of the Exam you want to create (1 for Practical and 2 for Final): ");
                 isChosen = int.TryParse(Console.ReadLine(), out chosen);
-            } while (!isChosen);
+            } while (!isChosen || chosen < 1 || chosen > 2);
 
             if (chosen == 1)
                 Exam = new PracticalExam();

@@ -8,6 +8,7 @@ namespace ExaminationSystem
 {
     internal class PracticalExam : Exam
     {
+        
         #region Properties
         public MCQuestion[] MCQ { get; set; }
         #endregion
@@ -18,7 +19,6 @@ namespace ExaminationSystem
             MCQ = new MCQuestion[NumberOfQuestions];
             for (int i = 0; i < NumberOfQuestions; i++)
             {
-                //for (int j = 0; j < MCQ?.Length; j++)
                 Console.WriteLine($"Please Enter the Details of Question Number({i+1}):");
                 MCQ[i] = new MCQuestion();
             }
@@ -28,8 +28,46 @@ namespace ExaminationSystem
         #region Methods
         public override void ShowExam()
         {
-            throw new NotImplementedException();
+            if (MCQ?.Length > 0)
+            {
+                for (int i = 0; i < MCQ.Length; i++)
+                {
+
+                    int McqAnswer;
+                    bool isMCQAnswer;
+
+                    Console.WriteLine(MCQ[i]);
+
+                    if (MCQ[i]?.AnswerList.Length > 0)
+                        for (int j = 0; j < MCQ[i].AnswerList.Length; j++)
+                            Console.Write($"{MCQ[i].AnswerList[j].Id}. {MCQ[i].AnswerList[j].Text}        ");
+
+                    Console.WriteLine("\n--------------------------------------------------");
+
+                    isMCQAnswer = int.TryParse(Console.ReadLine(), out McqAnswer);
+                    while (!isMCQAnswer || McqAnswer < 0 || McqAnswer > MCQ[i].AnswerList.Length)
+                    {
+                        Console.WriteLine("Invalid Choice!\nPlease Choose one from the Previous Valid choices");
+                        isMCQAnswer = int.TryParse(Console.ReadLine(), out McqAnswer);
+
+                    }
+                    Console.WriteLine("=====================================================\n");
+                }
+
+                Console.Clear();
+
+                ShowCorrectAnswers();
+            }
         } 
+
+
+        private void ShowCorrectAnswers()
+        {
+            Console.WriteLine("The Correct Answers of:");
+            for (int i = 0; i < MCQ.Length; i++)
+                Console.WriteLine($"Q{i+1}) {MCQ[i].CorrectAnswer.Text}");
+        }
+
         #endregion
     }
 }
