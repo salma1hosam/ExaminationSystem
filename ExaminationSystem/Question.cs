@@ -9,92 +9,63 @@ namespace ExaminationSystem
     internal abstract class Question
     {
         #region Attributes
-
         private string header;
         private string body;
         private int mark;
-
         private Answers[] answerList;
         private Answers correctAnswer;
         #endregion
 
         #region Properties
-
         public virtual string Header
         {
-            get => header; 
-            set 
-            { 
+            get => header;
+            set
+            {
                 header = value;
                 Console.WriteLine(value);
             }
         }
 
-
         public string Body
         {
             get => body;
-            set 
+            set
             {
                 do
                 {
                     Console.WriteLine("Please Enter the Body of the Question:");
-                    body = Console.ReadLine() ?? " ";
+                    body = Console.ReadLine();
                 } while (body is null);
             }
         }
 
-
         public int Mark
         {
             get => mark;
-            set 
+            set
             {
                 bool isMark;
                 do
                 {
                     Console.Write("Please Enter the Mark of the Question: ");
-                    isMark = int.TryParse(Console.ReadLine(), out mark); 
+                    isMark = int.TryParse(Console.ReadLine(), out mark);
                 } while (!isMark || mark < 0);
             }
         }
-
         public virtual Answers[] AnswerList { get => answerList; set => answerList = value; }
         public virtual Answers CorrectAnswer { get => correctAnswer; set => correctAnswer = value; }
-
-
-
-        ///private int[] inputAnswers;
-        ///public int[] InputAnswers
-        ///{
-        ///    get { return inputAnswers; }
-        ///    set { inputAnswers = value; }
-        ///}
-
 
         #endregion
 
         #region Constructors
-        protected Question(string header, string body, int mark/*, Answers[] answerList, Answers correctAnswer*/)
-        {
-            Header = header;
-            Body = body;
-            Mark = mark;
-            //AnswerList = answerList;
-            //CorrectAnswer = correctAnswer;
-        }
         protected Question(string header)
         {
             Header = header;
             Body = body;
             Mark = mark;
         }
-
-
         #endregion
 
-        #region Methods
-
-        #endregion
     }
 }

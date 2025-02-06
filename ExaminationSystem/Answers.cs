@@ -18,7 +18,7 @@ namespace ExaminationSystem
         {
             Id = id;
             Text = text;
-        } 
+        }
         #endregion
     }
 }

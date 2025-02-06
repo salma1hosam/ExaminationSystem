@@ -8,11 +8,9 @@ namespace ExaminationSystem
 {
     internal class MCQuestion : Question
     {
-
         #region Properties
-     
-        public override Answers[] AnswerList 
-        { 
+        public override Answers[] AnswerList
+        {
             get => base.AnswerList;
             set
             {
@@ -32,9 +30,9 @@ namespace ExaminationSystem
                 }
             }
         }
-        
-        public override Answers CorrectAnswer 
-        { 
+
+        public override Answers CorrectAnswer
+        {
             get => base.CorrectAnswer;
             set
             {
@@ -44,7 +42,7 @@ namespace ExaminationSystem
                 {
                     Console.WriteLine("Please Specify the Correct Choice of the Question:");
                     isCorrectAnswer = int.TryParse(Console.ReadLine(), out correct);
-                } while (!isCorrectAnswer || correct < 0 || correct > AnswerList?.Length);
+                } while (!isCorrectAnswer || correct < 1 || correct > AnswerList?.Length);
 
                 if (base.AnswerList?.Length > 0)
                     base.CorrectAnswer = base.AnswerList[correct - 1];
@@ -57,13 +55,7 @@ namespace ExaminationSystem
         #endregion
 
         #region Constructors
-        public MCQuestion(string header, string body, int mark, Answers[] answerList, Answers correctAnswer)
-            : base("Choose One Answer Question", body, mark)
-        {
-            AnswerList = answerList;
-            CorrectAnswer = correctAnswer;
-        }
-        public MCQuestion():base("Choose One Answer Question")
+        public MCQuestion() : base("Choose One Answer Question")
         {
             AnswerList = AnswerList;
             CorrectAnswer = CorrectAnswer;

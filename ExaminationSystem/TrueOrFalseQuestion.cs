@@ -9,8 +9,7 @@ namespace ExaminationSystem
     internal class TrueOrFalseQuestion : Question
     {
         #region Properties
-
-        public override Answers[] AnswerList 
+        public override Answers[] AnswerList
         {
             get => base.AnswerList;
             set
@@ -23,8 +22,8 @@ namespace ExaminationSystem
             }
         }
 
-        public override Answers CorrectAnswer 
-        { 
+        public override Answers CorrectAnswer
+        {
             get => base.CorrectAnswer;
             set
             {
@@ -47,15 +46,8 @@ namespace ExaminationSystem
 
         #endregion
 
-
         #region Constructors
-        public TrueOrFalseQuestion(string header, string body, int mark, Answers[] answerList, Answers correctAnswer) :
-            base("True | False Question", body, mark)
-        {
-            AnswerList = answerList;
-            CorrectAnswer = correctAnswer;
-        }
-        public TrueOrFalseQuestion():base("True | False Question")
+        public TrueOrFalseQuestion() : base("True | False Question")
         {
             AnswerList = AnswerList;
             CorrectAnswer = CorrectAnswer;

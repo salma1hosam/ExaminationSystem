@@ -20,7 +20,6 @@ namespace ExaminationSystem
         public MCQuestion[] MCQ { get => mCQ; set => mCQ = value; }
         public int[] TrueORfalseInputAnswers { get => trueORfalseInputAnswers; set => trueORfalseInputAnswers = value; }
         public int[] McqInputAnswers { get => mcqInputAnswers; set => mcqInputAnswers = value; }
-
         #endregion
 
         #region Constructors
@@ -42,7 +41,7 @@ namespace ExaminationSystem
                 } while (!isChoice || choice < 1 || choice > 2);
 
                 if (choice == 1)
-                {
+                { 
                     trueOrFalse[TrueOrFalseIndex] = new TrueOrFalseQuestion();
                     TrueOrFalseIndex++;
                 }
@@ -54,33 +53,20 @@ namespace ExaminationSystem
                 else
                     Console.WriteLine("Invalid Choice");
             }
-
             Array.Resize(ref trueOrFalse, TrueOrFalseIndex);
             Array.Resize(ref mCQ, McqIndex);
-
         }
         #endregion
 
         #region Methods
         public override void ShowExam()
         {
-            //int trueOrFalseAnswer;
-
-            //int[] trueORfalseInputAnswers = new int[TrueOrFalse.Length];
-
-            trueORfalseInputAnswers = new int[trueOrFalse.Length];
-
             if (trueOrFalse?.Length > 0)
             {
-                
+                trueORfalseInputAnswers = new int[trueOrFalse.Length];
                 bool isTFAnswer;
-
                 for (int i = 0; i < trueOrFalse.Length; i++)
                 {
-                    ///Console.WriteLine($"{TrueOrFalse[i].Header}           Mark({TrueOrFalse[i].Mark})");
-                    ///Console.WriteLine($"{TrueOrFalse[i].Body}\n1. True         2. False");
-
-
                     Console.WriteLine(trueOrFalse[i]);
 
                     if (trueOrFalse[i]?.AnswerList.Length > 0)
@@ -91,35 +77,22 @@ namespace ExaminationSystem
 
                     isTFAnswer = int.TryParse(Console.ReadLine(), out trueORfalseInputAnswers[i]);
 
-                    while (!isTFAnswer || trueORfalseInputAnswers[i] < 0 || trueORfalseInputAnswers[i] > trueOrFalse[i].AnswerList.Length)
+                    while (!isTFAnswer || trueORfalseInputAnswers[i] < 1 || trueORfalseInputAnswers[i] > trueOrFalse[i].AnswerList.Length)
                     {
                         Console.WriteLine("Invalid Choice!\nPlease Choose one from the Previous Valid choices");
                         isTFAnswer = int.TryParse(Console.ReadLine(), out trueORfalseInputAnswers[i]);
-
                     }
-
-
 
                     Console.WriteLine("=====================================================\n");
                 }
             }
 
-
-            //int McqAnswer = 0;
-
-            //int[] mcqInputAnswers = new int[MCQ.Length];
-
-            mcqInputAnswers = new int[mCQ.Length];
-
             if (mCQ?.Length > 0)
             {
+                mcqInputAnswers = new int[mCQ.Length];
                 bool isMCQAnswer;
                 for (int i = 0; i < mCQ.Length; i++)
                 {
-                    ///Console.WriteLine($"{MCQ[i].Header}           Mark({MCQ[i].Mark})");
-                    ///Console.WriteLine($"{MCQ[i].Body}");
-
-
                     Console.WriteLine(mCQ[i]);
 
                     if (mCQ[i]?.AnswerList.Length > 0)
@@ -129,12 +102,12 @@ namespace ExaminationSystem
                     Console.WriteLine("\n--------------------------------------------------");
 
                     isMCQAnswer = int.TryParse(Console.ReadLine(), out mcqInputAnswers[i]);
-                    while (!isMCQAnswer || mcqInputAnswers[i] < 0 || mcqInputAnswers[i] > mCQ[i].AnswerList.Length)
+                    while (!isMCQAnswer || mcqInputAnswers[i] < 1 || mcqInputAnswers[i] > mCQ[i].AnswerList.Length)
                     {
                         Console.WriteLine("Invalid Choice!\nPlease Choose one from the Previous Valid choices");
                         isMCQAnswer = int.TryParse(Console.ReadLine(), out mcqInputAnswers[i]);
-
                     }
+
                     Console.WriteLine("=====================================================\n");
                 }
             }
@@ -148,16 +121,14 @@ namespace ExaminationSystem
 
         private void ShowQuestionsAndAnswers()
         {
-            if (trueOrFalse?.Length > 0 || mCQ?.Length > 0)
-            {
-                Console.WriteLine("Your Answers:");
-
+            Console.WriteLine("Your Answers:");
+            if (trueOrFalse?.Length > 0)
                 for (int i = 0; i < trueOrFalse?.Length; i++)
                     Console.WriteLine($"Q{i + 1}) {trueOrFalse[i].Body} : {trueOrFalse[i].AnswerList[trueORfalseInputAnswers[i] - 1].Text}");
 
+            if (mCQ?.Length > 0)
                 for (int j = 0; j < mCQ?.Length; j++)
-                    Console.WriteLine($"Q{(trueOrFalse.Length) + j + 1}) {mCQ[j].Body} : {mCQ[j].AnswerList[mcqInputAnswers[j] - 1].Text}");
-            }
+                    Console.WriteLine($"Q{(trueOrFalse?.Length) + j + 1}) {mCQ[j].Body} : {mCQ[j].AnswerList[mcqInputAnswers[j] - 1].Text}");
         }
 
         private void ShowGrade()
@@ -168,18 +139,17 @@ namespace ExaminationSystem
             if (trueOrFalse?.Length > 0)
             {
                 for (int i = 0; i < trueOrFalse.Length; i++)
-                { 
+                {
                     totalMarks += trueOrFalse[i].Mark;
                     if (trueORfalseInputAnswers[i] == trueOrFalse[i].CorrectAnswer.Id)
                         qCounter += trueOrFalse[i].Mark;
                 }
-
             }
 
             if (mCQ?.Length > 0)
             {
                 for (int j = 0; j < mCQ.Length; j++)
-                { 
+                {
                     totalMarks += mCQ[j].Mark;
                     if (mcqInputAnswers[j] == mCQ[j].CorrectAnswer.Id)
                         qCounter += mCQ[j].Mark;

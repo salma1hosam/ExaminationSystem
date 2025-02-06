@@ -8,36 +8,10 @@ namespace ExaminationSystem
 {
     internal class Subject
     {
-        #region Attributes
-        //private Exam exam;
-        #endregion
-
         #region Properties
         public int Id { get; set; }
         public string Name { get; set; }
         public Exam Exam { get; set; }
-
-        ///public Exam Exam
-        ///{
-        ///    get { return exam; }
-        ///    set 
-        ///    {
-        ///        bool isChosen;
-        ///        int chosen;
-        ///        do
-        ///        {
-        ///            Console.Write("Please Enter the Type of the Exam you want to create (1 for Practical and 2 for Final): ");
-        ///            isChosen = int.TryParse(Console.ReadLine(), out chosen); 
-        ///        } while (!isChosen);
-        ///        if (chosen == 1)
-        ///            exam = new PracticalExam();
-        ///        else if(chosen == 2)
-        ///            exam = new FinalExam();
-        ///        else
-        ///            Console.WriteLine("Invalid Choice");
-        ///    }
-        ///}
-
         #endregion
 
         #region Constructors
@@ -65,7 +39,7 @@ namespace ExaminationSystem
                 Exam = new FinalExam();
             else
                 Console.WriteLine("Invalid Choice");
-        } 
+        }
         #endregion
     }
 }
